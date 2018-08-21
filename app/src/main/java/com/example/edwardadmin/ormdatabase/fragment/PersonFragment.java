@@ -37,8 +37,10 @@ public class PersonFragment extends Fragment implements IPersonView {
     private Button mAddOldPersonButton;
     private Button mAddNewPersonButton;
     private Button mUpdatePersonButton;
+    private Button mAddPersonImageButton;
     private EditText mInputAddNumber;
     private EditText mInputUpdateNumber;
+    private EditText mInputAddImage;
     private ListView mPersonListView;
     private ContentLoadingProgressBar mContentLoadingProgressBar;
     private FrameLayout mContentFrameLayout;
@@ -97,6 +99,9 @@ public class PersonFragment extends Fragment implements IPersonView {
         mAddOldPersonButton = personView.findViewById(R.id.add_person);
         mAddNewPersonButton = personView.findViewById(R.id.add_person1);
         mUpdatePersonButton = personView.findViewById(R.id.update_person);
+        mAddPersonImageButton = personView.findViewById(R.id.add_image);
+        mInputAddImage = personView.findViewById(R.id.input_add_image);
+
         mInputAddNumber = personView.findViewById(R.id.input_add_number);
         mInputUpdateNumber = personView.findViewById(R.id.input_update_number);
         mPersonListView = personView.findViewById(R.id.person_list);
@@ -125,6 +130,23 @@ public class PersonFragment extends Fragment implements IPersonView {
                 updateOrAddPersonData(personNumber);
             }
         });
+
+        mAddPersonImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String personNumber = mInputAddImage.getText().toString().trim();
+                addImageData(personNumber);
+            }
+        });
+    }
+
+    private void addImageData(String personNumber) {
+        //add image
+        String personImage = "http://pic9.photophoto.cn/20081229/0034034829945374_b.jpg";
+        PersonInfo personInfo = new PersonInfo("Edward", "male", "26",
+                "175", "Han nationality", personNumber, personImage);
+        PersonToken personToken = new PersonToken(System.currentTimeMillis());
+        iPersonPresenter.updateOrAddPersonData(personNumber, personInfo, personToken);
     }
 
     private void updateOrAddPersonData(String personNumber) {

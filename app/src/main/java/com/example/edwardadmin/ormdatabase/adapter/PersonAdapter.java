@@ -1,13 +1,17 @@
 package com.example.edwardadmin.ormdatabase.adapter;
 
 import android.content.Context;
+import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.edwardadmin.ormdatabase.R;
+import com.example.edwardadmin.ormdatabase.cache.CacheUtil;
 import com.example.edwardadmin.ormdatabase.entity.PersonInfo;
 import com.example.edwardadmin.ormdatabase.entity.PersonToken;
 import com.example.edwardadmin.ormdatabase.util.TimeConvertUtils;
@@ -53,6 +57,7 @@ public class PersonAdapter extends BaseAdapter {
             viewHolder.personNative = convertView.findViewById(R.id.person_native);
             viewHolder.personNumber = convertView.findViewById(R.id.person_number);
             viewHolder.personTime = convertView.findViewById(R.id.person_time);
+            viewHolder.personView = convertView.findViewById(R.id.person_image);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
@@ -76,6 +81,15 @@ public class PersonAdapter extends BaseAdapter {
             }
             viewHolder.personTime.setText(builder.toString());
         }
+
+        //add new person view
+        String personImage = personInfo.getPersonImage();
+        String personNumber = personInfo.getPersonNumber();
+        if (personImage != null) {
+            CacheUtil.getInstance().displayImage(Uri.parse(personImage), viewHolder.personView, personNumber);
+        } else {
+            viewHolder.personView.setImageResource(R.drawable.head);
+        }
         return convertView;
     }
 
@@ -87,5 +101,6 @@ public class PersonAdapter extends BaseAdapter {
         TextView personNative;
         TextView personNumber;
         TextView personTime;
+        ImageView personView;
     }
 }

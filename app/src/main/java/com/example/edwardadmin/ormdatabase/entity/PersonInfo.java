@@ -32,6 +32,9 @@ public class PersonInfo implements Serializable {
     @DatabaseField(columnName = "personNumber")
     private String personNumber;
 
+    @DatabaseField(columnName = "personImage")
+    private String personImage;
+
     @ForeignCollectionField(eager = true)
     public ForeignCollection<PersonToken> personTokens;
 
@@ -45,6 +48,16 @@ public class PersonInfo implements Serializable {
         this.personHeight = personHeight;
         this.personNumber = personNumber;
         this.personNative = personNative;
+    }
+
+    public PersonInfo(String personName, String personSex, String personAge, String personHeight, String personNative, String personNumber, String personImage) {
+        this.personName = personName;
+        this.personSex = personSex;
+        this.personAge = personAge;
+        this.personHeight = personHeight;
+        this.personNumber = personNumber;
+        this.personNative = personNative;
+        this.personImage = personImage;
     }
 
     public String getPersonName() {
@@ -71,6 +84,10 @@ public class PersonInfo implements Serializable {
         return personNumber;
     }
 
+    public String getPersonImage() {
+        return personImage;
+    }
+
     @Override
     public String toString() {
         return "PersonInfo{" +
@@ -81,6 +98,8 @@ public class PersonInfo implements Serializable {
                 ", personHeight='" + personHeight + '\'' +
                 ", personNative='" + personNative + '\'' +
                 ", personNumber='" + personNumber + '\'' +
+                ", personImage='" + personImage + '\'' +
+                ", personTokens=" + personTokens +
                 '}';
     }
 }

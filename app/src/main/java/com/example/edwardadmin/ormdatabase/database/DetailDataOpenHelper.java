@@ -17,7 +17,7 @@ import java.sql.SQLException;
 public class DetailDataOpenHelper extends OrmLiteSqliteOpenHelper {
 
     public static final String DATABASE_PATH = Environment.getExternalStorageDirectory() + "/detail.db";
-    public static final int DATABASE_VERSION = 2;
+    public static final int DATABASE_VERSION = 3;
 
     private static DetailDataOpenHelper instance;
 
@@ -42,7 +42,6 @@ public class DetailDataOpenHelper extends OrmLiteSqliteOpenHelper {
         try {
             TableUtils.createTable(connectionSource, PersonInfo.class);
             TableUtils.createTable(connectionSource, IdentityInfo.class);
-            //TableUtils.createTable(connectionSource, PersonToken.class);
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -58,6 +57,14 @@ public class DetailDataOpenHelper extends OrmLiteSqliteOpenHelper {
                 TableUtils.dropTable(connectionSource, IdentityInfo.class, false);
 
                 TableUtils.createTable(connectionSource, PersonToken.class);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            DetailDataBaseUtil.upgradeTable(sqLiteDatabase, connectionSource, PersonInfo.class, DetailDataBaseUtil.OPERATION_TYPE.ADD);
+        }
+        if (oldVersion < 3) {
+            try {
+                TableUtils.dropTable(connectionSource, IdentityInfo.class, false);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
