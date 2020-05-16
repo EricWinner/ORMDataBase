@@ -1,19 +1,10 @@
 package com.example.edwardadmin.ormdatabase.cache;
 
-import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.util.Log;
 import android.widget.ImageView;
 
 import com.example.edwardadmin.ormdatabase.config.Constant;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.logging.Handler;
 
 public class CacheUtil {
 

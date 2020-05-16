@@ -67,7 +67,6 @@ public class DetailDataBaseUtil {
         }
     }
 
-
     /**
      * 获取表名(ormlite DatabaseTableConfig.java)
      *

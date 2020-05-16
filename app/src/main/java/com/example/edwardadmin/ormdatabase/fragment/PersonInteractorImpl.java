@@ -20,6 +20,10 @@ public class PersonInteractorImpl implements IPersonInteractor {
         personTokenOperationTask = new PersonTokenOperationTask(mContext);
     }
 
+    /**
+     * 加载数据，从数据库中查询数据
+     * @param loadingFinishedListener
+     */
     @Override
     public void loadPersonData(onLoadingFinishedListener loadingFinishedListener) {
         ArrayList<PersonInfo> personInfoArrayList = personInfoOperationTask.queryPersonData();
@@ -31,6 +35,11 @@ public class PersonInteractorImpl implements IPersonInteractor {
         }
     }
 
+    /**
+     * 添加数据，将PersonInfo，插入到数据库中
+     * @param personInfo
+     * @param loadingFinishedListener
+     */
     @Override
     public void addPersonData(PersonInfo personInfo, onLoadingFinishedListener loadingFinishedListener) {
         boolean insert = personInfoOperationTask.insertPersonData(personInfo);

@@ -68,20 +68,16 @@ public class PersonInfoOperationTask extends BaseOperationTask implements IPerso
 
     @Override
     public ArrayList<PersonInfo> queryPersonData() {
-        Log.d("jiangsu", "queryPersonData start !");
         mAllPersonData = new ArrayList<>();
         Savepoint savepoint = null;
         try {
             savepoint = androidDatabaseConnection.setSavePoint("start");
-            PersonInfo personInfo = personInfoDao.queryForId(1);
             androidDatabaseConnection.setAutoCommit(false);
             mAllPersonData = (ArrayList<PersonInfo>) personInfoDao.queryBuilder().orderBy("id", false).query();
             androidDatabaseConnection.commit(savepoint);
-            Log.d("jiangsu", "queryPersonData end !");
             return mAllPersonData;
         } catch (SQLException e) {
             e.printStackTrace();
-            Log.d("jiangsu", "queryPersonData error e = " + e);
             try {
                 androidDatabaseConnection.rollback(savepoint);
             } catch (SQLException e1) {
@@ -93,7 +89,6 @@ public class PersonInfoOperationTask extends BaseOperationTask implements IPerso
 
     @Override
     public PersonInfo queryPersonDataByPersonNumber(String personNumber) {
-        Log.d("jiangsu", "queryPersonDataByPersonNumber start !");
         PersonInfo personInfo = null;
         Savepoint savepoint = null;
         try {
@@ -102,18 +97,15 @@ public class PersonInfoOperationTask extends BaseOperationTask implements IPerso
             for(int index = 0; index < list.size(); index ++) {
                 PersonInfo info1 = list.get(index);
                 if (info1.getPersonNumber().equals(personNumber)) {
-                    Log.d("jiangsu", "queryPersonDataByPersonNumber  info1 = " + info1);
                     personInfo = info1;
                 }
             }
             androidDatabaseConnection.setAutoCommit(false);
             mAllPersonData = (ArrayList<PersonInfo>) personInfoDao.queryBuilder().orderBy("id", false).query();
             androidDatabaseConnection.commit(savepoint);
-            Log.d("jiangsu", "queryPersonDataByPersonNumber end !");
             return personInfo;
         } catch (SQLException e) {
             e.printStackTrace();
-            Log.d("jiangsu", "queryPersonDataByPersonNumber error e = " + e);
             try {
                 androidDatabaseConnection.rollback(savepoint);
             } catch (SQLException e1) {

@@ -38,6 +38,9 @@ public class PersonInfo implements Serializable {
     @ForeignCollectionField(eager = true)
     public ForeignCollection<PersonToken> personTokens;
 
+    /**
+     * 创建空的构造函数，否则报错
+     */
     public PersonInfo() {
     }
 

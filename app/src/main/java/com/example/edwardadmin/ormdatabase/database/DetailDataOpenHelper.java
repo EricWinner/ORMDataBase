@@ -38,7 +38,6 @@ public class DetailDataOpenHelper extends OrmLiteSqliteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase, ConnectionSource connectionSource) {
-        Log.d("jiangsu", "DetailDataOpenHelper onCreate ");
         try {
             TableUtils.createTable(connectionSource, PersonInfo.class);
             TableUtils.createTable(connectionSource, IdentityInfo.class);
@@ -50,7 +49,7 @@ public class DetailDataOpenHelper extends OrmLiteSqliteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, ConnectionSource connectionSource, int oldVersion, int newVersion) {
-        Log.d("jiangsu", "DetailDataOpenHelper onUpgrade oldVersion = " + oldVersion + ",newVersion = " + newVersion);
+
         if (oldVersion < 2) {
             try {
                 //version is 2, add PersonToken table.
